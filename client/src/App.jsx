@@ -28,6 +28,11 @@ function App() {
       setIsConnected(false);
     });
 
+    // Load chat history from MongoDB when entering a room
+    socketRef.current.on('load_history', (history) => {
+      setMessages(history);
+    });
+
     // Listen for incoming messages in this specific room
     socketRef.current.on('message', (data) => {
       setMessages((prev) => [...prev, data]);
@@ -208,11 +213,10 @@ function App() {
             return (
               <div key={index} className={`flex w-full ${isMe ? 'justify-end' : 'justify-start'}`}>
                 <div
-                  className={`relative max-w-[82%] sm:max-w-[70%] min-w-[90px] px-3.5 pt-2 pb-1.5 shadow-xs text-sm break-words transition-all ${
-                    isMe
+                  className={`relative max-w-[82%] sm:max-w-[70%] min-w-[90px] px-3.5 pt-2 pb-1.5 shadow-xs text-sm break-words transition-all ${isMe
                       ? 'bg-[#d9fdd3] text-[#111b21] rounded-2xl rounded-tr-xs'
                       : 'bg-white text-[#111b21] rounded-2xl rounded-tl-xs border border-gray-100'
-                  }`}
+                    }`}
                 >
                   {!isMe && (
                     <div className="text-xs font-semibold text-[#128c7e] mb-0.5">
