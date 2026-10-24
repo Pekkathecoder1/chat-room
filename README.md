@@ -1,2 +1,3 @@
 # chat-room
-It is a proper chatroom using web sockets make by node js and reach in backend and frontend connected via mongodb to not lose messages 
+
+A real-time chat room application built with Node.js and WebSockets, with React for the frontend and backend services connected to MongoDB for persistent message storage.
